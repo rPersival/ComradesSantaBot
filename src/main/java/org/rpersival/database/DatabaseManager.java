@@ -32,7 +32,7 @@ public class DatabaseManager {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("An error occurred while disconnecting from database.");
+            throw new RuntimeException("An error occurred while disconnecting from the database.");
         }
     }
 

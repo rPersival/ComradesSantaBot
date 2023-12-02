@@ -2,8 +2,8 @@ package org.rpersival.bot;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
+import discord4j.core.event.domain.interaction.ButtonInteractionEvent;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
-import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.retriever.EntityRetrievalStrategy;
 import discord4j.discordjson.json.ApplicationCommandData;
@@ -29,6 +29,7 @@ public class DiscordBot {
         client = DiscordClient.create(token)
                 .gateway().setEntityRetrievalStrategy(EntityRetrievalStrategy.REST)
                 .setEnabledIntents(IntentSet.of(
+                        Intent.DIRECT_MESSAGES,
                         Intent.GUILD_MESSAGES,
                         Intent.GUILD_MEMBERS,
                         Intent.GUILDS
@@ -37,7 +38,7 @@ public class DiscordBot {
                 .block();
 
         if (client == null) {
-            throw new RuntimeException();
+            throw new RuntimeException("Unable to log in");
         }
 
         applicationId = client.getRestClient().getApplicationId().block();
@@ -45,6 +46,7 @@ public class DiscordBot {
         initializeCommands();
         subscribeToEvents();
 
+//        client.on(DisconnectEvent.class).subscribe((event) -> DatabaseManager.closeConnection());
         client.onDisconnect().block();
     }
 
@@ -55,9 +57,10 @@ public class DiscordBot {
     }
 
     public void subscribeToEvents() {
-        client.on(ReadyEvent.class, UpdateHandler::handleReadyEvent).subscribe();
-        client.on(MessageCreateEvent.class, UpdateHandler::handleMessageCreateEvent).subscribe();
-        client.on(ChatInputInteractionEvent.class, UpdateHandler::handleApplicationCommand).subscribe();
+//        client.on(ReadyEvent.class, UpdateHandler::onStart).subscribe();
+        client.on(MessageCreateEvent.class, UpdateHandler::onMessageReceived).subscribe();
+        client.on(ButtonInteractionEvent.class, UpdateHandler::onButtonClick).subscribe();
+        client.on(ChatInputInteractionEvent.class, UpdateHandler::onChatInteraction).subscribe();
     }
 
     private void initializeCommands() {
