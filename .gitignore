@@ -37,4 +37,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Other ###
 /.idea/uiDesigner.xml
+/src/main/resources/data/
