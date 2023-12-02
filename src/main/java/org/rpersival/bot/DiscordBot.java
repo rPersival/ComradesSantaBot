@@ -1,4 +1,4 @@
-package org.rpersival;
+package org.rpersival.bot;
 
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
@@ -11,6 +11,7 @@ import discord4j.discordjson.json.ApplicationCommandRequest;
 import discord4j.gateway.intent.Intent;
 import discord4j.gateway.intent.IntentSet;
 import discord4j.rest.service.ApplicationService;
+import org.rpersival.bot.interaction.Commands;
 
 import java.util.Collections;
 import java.util.List;

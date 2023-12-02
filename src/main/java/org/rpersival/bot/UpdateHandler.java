@@ -1,4 +1,4 @@
-package org.rpersival;
+package org.rpersival.bot;
 
 import discord4j.common.util.Snowflake;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
@@ -6,6 +6,7 @@ import discord4j.core.event.domain.lifecycle.ReadyEvent;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.MessageChannel;
+import org.rpersival.bot.interaction.Commands;
 import reactor.core.publisher.Mono;
 
 public class UpdateHandler {

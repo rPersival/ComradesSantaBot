@@ -1,6 +1,7 @@
-package org.rpersival;
+package org.rpersival.bot.interaction;
 
 import discord4j.discordjson.json.ApplicationCommandRequest;
+import org.rpersival.Util;
 
 import java.util.List;
 

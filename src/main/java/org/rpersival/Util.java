@@ -1,5 +1,7 @@
 package org.rpersival;
 
+import org.rpersival.bot.interaction.Command;
+
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
